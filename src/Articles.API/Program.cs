@@ -9,7 +9,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-
 namespace Articles.API
 {
     public class Program
@@ -23,7 +22,7 @@ namespace Articles.API
                 try
                 {
                     var northwindContext = services.GetRequiredService<ArticleDbContext>();
-                    northwindContext.Database.Migrate();                  
+                    northwindContext.Database.Migrate();
                 }
                 catch (Exception ex)
                 {
@@ -36,6 +35,11 @@ namespace Articles.API
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .ConfigureLogging(logging =>
+                {
+                    logging.ClearProviders();
+                    logging.AddConsole();
+                })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();

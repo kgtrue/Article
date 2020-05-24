@@ -32,7 +32,7 @@ namespace Articles.API
             services.AddPersistence(Configuration);
             services.AddApplication();
             services.AddControllers();
-            services.AddSwaggerDocument(configure => 
+            services.AddSwaggerDocument(configure =>
             {
                 configure.Title = "Articles API";
             });
@@ -43,6 +43,12 @@ namespace Articles.API
             services
                .AddControllersWithViews()
                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<IArticleDbContext>());
+
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
+            });
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,7 +63,7 @@ namespace Articles.API
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
                 {
-                 endpoints.MapControllers();
+                    endpoints.MapControllers();
                 });
             app.UseOpenApi();
             app.UseSwaggerUi3(settings =>
