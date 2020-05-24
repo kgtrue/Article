@@ -18,7 +18,7 @@ namespace Articles.Core.Application.Common.Behaviours
         public Task Process(TRequest request, CancellationToken cancellationToken)
         {
             var name = typeof(TRequest).Name;
-            _logger.LogInformation("Article Request: {Name} {@UserId} {@Request}", name, request);
+            _logger.LogInformation("Article Request: {Name} {@Request}", name, request);
             return Task.CompletedTask;
         }
     }

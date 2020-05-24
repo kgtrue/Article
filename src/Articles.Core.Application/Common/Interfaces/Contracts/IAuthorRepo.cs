@@ -10,6 +10,7 @@ namespace Articles.Core.Application.Common.Interfaces.Contracts
     public interface IAuthorRepo
     {
         public Task<Author> GetById(Guid id, CancellationToken cancellationToken);
+        public Task<IEnumerable<Author>> GetAll(CancellationToken cancellationToken);
         public Task<Author> Save(Author author, CancellationToken cancellationToken);
         public Task Update(Author author, CancellationToken cancellationToken);
     }

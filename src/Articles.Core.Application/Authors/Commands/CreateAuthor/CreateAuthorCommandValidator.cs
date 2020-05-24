@@ -10,7 +10,9 @@ namespace Articles.Core.Application.Authors.Commands.CreateAuthor
         public CreateAuthorCommandValidator()
         {
             RuleFor(x => x.FirstName).NotEmpty();
+            RuleFor(x => x.FirstName).NotNull();
             RuleFor(x => x.LastName).NotEmpty();
+            RuleFor(x => x.LastName).NotNull();
         }
     }
 }

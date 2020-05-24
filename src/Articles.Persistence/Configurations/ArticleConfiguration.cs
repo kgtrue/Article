@@ -8,7 +8,12 @@ namespace Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<Article> builder)
         {
-            throw new System.NotImplementedException();
+            builder.HasKey(e => e.Id);
+            builder.Property(e => e.Id).ValueGeneratedOnAdd();
+            builder.Property(e => e.Heading).IsRequired();
+            builder.Property(e => e.Text).IsRequired();
+            builder.Property(e => e.Year).IsRequired();
+            builder.HasOne(e => e.Author).WithMany(e=> e.Articles);
         }
     }
 }

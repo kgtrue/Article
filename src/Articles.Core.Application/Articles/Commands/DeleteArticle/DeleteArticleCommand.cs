@@ -12,7 +12,7 @@ namespace Articles.Core.Application.Articles.Commands.DeleteArticle
 {
     public class DeleteArticleCommand : IRequest
     {
-        public Guid ArticleId { get; set; }
+        public Guid Id { get; set; }
         public class Handler : IRequestHandler<DeleteArticleCommand>
         {
             private readonly IArticleRepo _articleRepo;
@@ -27,10 +27,10 @@ namespace Articles.Core.Application.Articles.Commands.DeleteArticle
             }
             public async Task<Unit> Handle(DeleteArticleCommand request, CancellationToken cancellationToken)
             {
-                var article = await _articleRepo.GetById(request.ArticleId, cancellationToken);
+                var article = await _articleRepo.GetById(request.Id, cancellationToken);
                 if (article == null)
                 {
-                    throw new NotFoundException(nameof(Article), request.ArticleId);
+                    throw new NotFoundException(nameof(Article), request.Id);
                 }
                 await _articleRepo.Delete(article.Id, cancellationToken);
                 return Unit.Value;

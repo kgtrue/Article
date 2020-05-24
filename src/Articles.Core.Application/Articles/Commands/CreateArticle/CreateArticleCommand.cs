@@ -35,13 +35,14 @@ namespace Articles.Core.Application.Articles.Commands.CreateArticle
                 {
                     throw new NotFoundException(nameof(Author), request.AuthorId);
                 }
-                var entity = new Article(author)
+                var entity = new Article()
                 {
                     Heading = request.Heading,
                     Text = request.Text,
-                    Year = request.Year
+                    Year = request.Year,
+                    Author = author
                 };
-                var result = await _articleRepo.Save(entity, cancellationToken);                
+                var result = await _articleRepo.Save(entity, cancellationToken);
                 return Unit.Value;
             }
         }

@@ -1,5 +1,6 @@
 ﻿using Articles.Core.Application.Authors.Commands.CreateAuthor;
 using Articles.Core.Application.Authors.Commands.UpdateAuthor;
+using Articles.Core.Application.Authors.Queries.GetAuthorsList;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -23,6 +24,11 @@ namespace Articles.API.Controllers
         {
             await Mediator.Send(command);
             return NoContent();
+        }
+        [HttpGet]
+        public async Task<ActionResult<GetAuthorListVM>> GetAll()
+        {
+            return Ok(await Mediator.Send(new GetAuthorsListQuery()));
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Articles.Core.Application.Authors.Commands.UpdateAuthor
     {
         public UpdateAuthorCommandValidator()
         {
-            RuleFor(x => x.AuthorId).NotEmpty();
+            RuleFor(x => x.Id).NotEmpty();
             RuleFor(x => x.FirstName).NotEmpty();
             RuleFor(x => x.LastName).NotEmpty();
         }

@@ -12,7 +12,7 @@ namespace Articles.Core.Application.Authors.Commands.UpdateAuthor
 {
     public class UpdateAuthorCommand : IRequest
     {
-        public Guid AuthorId { get; set; }
+        public Guid Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public class Handler : IRequestHandler<UpdateAuthorCommand>
@@ -28,10 +28,10 @@ namespace Articles.Core.Application.Authors.Commands.UpdateAuthor
             }
             public async Task<Unit> Handle(UpdateAuthorCommand request, CancellationToken cancellationToken)
             {
-                var author = await _authorRepo.GetById(request.AuthorId, cancellationToken);
+                var author = await _authorRepo.GetById(request.Id, cancellationToken);
                 if (author == null)
                 {
-                    throw new NotFoundException(nameof(Author), request.AuthorId);
+                    throw new NotFoundException(nameof(Author), request.Id);
                 }
                 author.FirstName = request.FirstName;
                 author.LastName = request.LastName;

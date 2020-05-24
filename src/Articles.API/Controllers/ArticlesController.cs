@@ -1,9 +1,12 @@
 ﻿using Articles.Core.Application.Articles.Commands.CreateArticle;
 using Articles.Core.Application.Articles.Commands.DeleteArticle;
 using Articles.Core.Application.Articles.Commands.UpdateArticle;
+using Articles.Core.Application.Articles.Queries.GetArticleDetail;
+using Articles.Core.Application.Articles.Queries.GetArticleList;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace Articles.API.Controllers
@@ -30,7 +33,7 @@ namespace Articles.API.Controllers
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(Guid id)
         {
             await Mediator.Send(new DeleteArticleCommand { Id = id });
 
@@ -38,14 +41,14 @@ namespace Articles.API.Controllers
         }
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<EmployeeDetailVm>> Get(int id)
+        public async Task<ActionResult<ArticleDetailVM>> Get(Guid id)
         {
-            return Ok(await Mediator.Send(new GetEmployeeDetailQuery { Id = id }));
+            return Ok(await Mediator.Send(new GetArticleDetailQuery { ArticleId = id }));
         }
         [HttpGet]
-        public async Task<ActionResult<CategoriesListVm>> GetAll()
+        public async Task<ActionResult<GetArticleListVM>> GetAll()
         {
-            return Ok(await Mediator.Send(new GetCategoriesListQuery()));
+            return Ok(await Mediator.Send(new GetArticlesListQuery()));
         }
     }
 }
