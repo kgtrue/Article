@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Articles.Core.Application.Common.Interfaces.Contracts
 {
-    public interface IArticleRepo
+    public interface IArticleRepo: IArticleSearchRepo
     {
         public Task<Article> GetById(Guid id, CancellationToken cancellationToken);
         public Task<IEnumerable<Article>> GetAll(CancellationToken cancellationToken);

@@ -14,6 +14,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using FluentValidation.AspNetCore;
 using Articles.Core.Application.Common.Interfaces;
+using Articles.Infrastructure;
 
 namespace Articles.API
 {
@@ -30,6 +31,7 @@ namespace Articles.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddPersistence(Configuration);
+            services.AddInfrastructure();
             services.AddApplication();
             services.AddControllers();
             services.AddSwaggerDocument(configure =>

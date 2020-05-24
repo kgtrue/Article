@@ -21,6 +21,7 @@ namespace Articles.Persistence
             services.AddScoped<IArticleDbContext>(provider => provider.GetService<ArticleDbContext>());
             services.AddScoped<IArticleRepo, ArticleRepo>();
             services.AddScoped<IAuthorRepo, AuthorRepo>();
+            services.AddScoped<IArticleSearchRepo, ArticleRepo>();
             return services;
         }
     }

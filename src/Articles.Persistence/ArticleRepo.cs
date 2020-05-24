@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace Articles.Persistence
 {
@@ -34,6 +35,13 @@ namespace Articles.Persistence
             await _articleDbContext.SaveChangesAsync(cancellationToken);
             return entry.Entity;
         }
+
+        public async Task<IEnumerable<Article>> Search(Expression<Func<Article, bool>> filter, CancellationToken cancellationToken)
+        {
+            var results = await _articleDbContext.Articles.Include(e => e.Author).Where(filter).ToListAsync(cancellationToken);
+            return results;
+        }
+
         public async Task Update(Article article, CancellationToken cancellationToken)
         {
             var entry = _articleDbContext.Set<Article>().Update(article);
