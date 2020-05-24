@@ -5,12 +5,9 @@
     <UserSecretsId>e7e288fa-4faf-456f-939b-40f965b976b1</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..</DockerfileContext>
+    <DockerfileFile>..\..\Dockerfile</DockerfileFile>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Include="..\..\Dockerfile" Link="Dockerfile" />
-  </ItemGroup>
-  
   <ItemGroup>
     <PackageReference Include="FluentValidation.AspNetCore" Version="8.6.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.4">

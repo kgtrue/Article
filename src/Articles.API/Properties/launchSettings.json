@@ -19,7 +19,7 @@
     "Article.API": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "weatherforecast",
+      "launchUrl": "api",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
@@ -29,6 +29,13 @@
       "commandName": "Docker",
       "launchBrowser": true,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "environmentVariables": {
+        "SqlServerPassword": "KgtPass001",
+        "SqlServerPort": "1433",
+        "SqlServerUser": "SA",
+        "SqlServerName": "192.168.1.42",
+        "SqlServerCatalog": "Articles"
+      },
       "publishAllPorts": true,
       "useSSL": true
     }
