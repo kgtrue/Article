@@ -15,18 +15,11 @@ COPY ["src/Articles.Core.Application/Articles.Core.Application.csproj", "src/Art
 COPY ["src/Articles.Core/Articles.Core.csproj", "src/Articles.Core/"]
 COPY ["src/Articles.Core.Tests/Articles.Core.Tests.csproj", "src/Articles.Core.Tests/"]
 COPY ["src/Articles.Core.Application.Tests/Articles.Core.Application.Tests.csproj", "src/Articles.Core.Application.Tests/"]
-RUN dotnet restore "src/Articles.Core.Tests/Articles.Core.Tests.csproj"
-RUN dotnet build "src/Articles.Core.Tests/Articles.Core.Tests.csproj" -c Release
-RUN dotnet restore "src/Articles.Core.Application.Tests/Articles.Core.Application.Tests.csproj"
-RUN dotnet build "src/Articles.Core.Application.Tests/Articles.Core.Application.Tests.csproj" -c Release
+
+RUN dotnet test "src/Articles.Core.Tests/Articles.Core.Tests.csproj" --logger "console;verbosity=detailed"
+
 RUN dotnet restore "src/Articles.API/Articles.API.csproj"
-WORKDIR "/src/src/Articles.Core.Tests"
-RUN dotnet test "Articles.Core.Tests.csproj"
-WORKDIR "/src/src/Articles.Core.Application.Tests"
-RUN dotnet test "Articles.Core.Application.Tests.csproj"
 WORKDIR /src
-
-
 
 COPY . .
 WORKDIR "/src/src/Articles.API"
