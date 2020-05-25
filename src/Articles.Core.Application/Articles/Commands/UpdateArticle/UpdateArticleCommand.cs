@@ -44,7 +44,7 @@ namespace Articles.Core.Application.Articles.Commands.UpdateArticle
                 article.Heading = request.Heading;
                 article.Text = request.Text;
                 article.Year = request.Year;
-                article.Author = author;
+                article.SetArticleAuthor(author);
                 await _articleRepo.Update(article, cancellationToken);
                 return Unit.Value;
             }

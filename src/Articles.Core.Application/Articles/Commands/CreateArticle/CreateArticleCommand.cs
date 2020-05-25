@@ -35,12 +35,11 @@ namespace Articles.Core.Application.Articles.Commands.CreateArticle
                 {
                     throw new NotFoundException(nameof(Author), request.AuthorId);
                 }
-                var entity = new Article()
+                var entity = new Article(author)
                 {
                     Heading = request.Heading,
                     Text = request.Text,
-                    Year = request.Year,
-                    Author = author
+                    Year = request.Year
                 };
                 var result = await _articleRepo.Save(entity, cancellationToken);
                 return Unit.Value;
