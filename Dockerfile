@@ -12,6 +12,10 @@ COPY ["src/Articles.API/Articles.API.csproj", "src/Articles.API/"]
 COPY ["src/Articles.Persistence/Articles.Persistence.csproj", "src/Articles.Persistence/"]
 COPY ["src/Articles.Core.Application/Articles.Core.Application.csproj", "src/Articles.Core.Application/"]
 COPY ["src/Articles.Core/Articles.Core.csproj", "src/Articles.Core/"]
+COPY ["src/Articles.Core.Tests/Articles.Core.Tests.csproj", "src/Articles.Core.Tests/"]
+COPY ["src/Articles.Core.Application.Tests/Articles.Core.csproj", "src/Articles.Core.Application.Tests/"]
+RUN dotnet restore "src/Articles.Core.Tests/Articles.Core.Tests.csproj"
+RUN dotnet restore "src/Articles.Core.Application.Tests/Articles.Core.csproj"
 RUN dotnet restore "src/Articles.API/Articles.API.csproj"
 COPY . .
 WORKDIR "/src/src/Articles.API"
