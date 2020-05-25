@@ -13,10 +13,13 @@ COPY ["src/Articles.Persistence/Articles.Persistence.csproj", "src/Articles.Pers
 COPY ["src/Articles.Core.Application/Articles.Core.Application.csproj", "src/Articles.Core.Application/"]
 COPY ["src/Articles.Core/Articles.Core.csproj", "src/Articles.Core/"]
 COPY ["src/Articles.Core.Tests/Articles.Core.Tests.csproj", "src/Articles.Core.Tests/"]
-COPY ["src/Articles.Core.Application.Tests/Articles.Core.csproj", "src/Articles.Core.Application.Tests/"]
+COPY ["src/Articles.Core.Application.Tests/Articles.Core.Application.Tests.csproj", "src/Articles.Core.Application.Tests/"]
 RUN dotnet restore "src/Articles.Core.Tests/Articles.Core.Tests.csproj"
-RUN dotnet restore "src/Articles.Core.Application.Tests/Articles.Core.csproj"
+RUN dotnet restore "src/Articles.Core.Application.Tests/Articles.Core.Application.Tests.csproj"
 RUN dotnet restore "src/Articles.API/Articles.API.csproj"
+RUN dotnet test "src/Articles.Core.Tests/Articles.Core.Tests.csproj"
+RUN dotnet test "src/Articles.Core.Application.Tests/Articles.Core.Application.Tests.csproj"
+
 COPY . .
 WORKDIR "/src/src/Articles.API"
 RUN dotnet build "Articles.API.csproj" -c Release -o /app/build
