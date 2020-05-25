@@ -10,6 +10,7 @@ FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
 COPY ["src/Articles.API/Articles.API.csproj", "src/Articles.API/"]
 COPY ["src/Articles.Persistence/Articles.Persistence.csproj", "src/Articles.Persistence/"]
+COPY ["src/Articles.Infrastructure/Articles.Infrastructure.csproj", "src/Articles.Infrastructure/"]
 COPY ["src/Articles.Core.Application/Articles.Core.Application.csproj", "src/Articles.Core.Application/"]
 COPY ["src/Articles.Core/Articles.Core.csproj", "src/Articles.Core/"]
 COPY ["src/Articles.Core.Tests/Articles.Core.Tests.csproj", "src/Articles.Core.Tests/"]
