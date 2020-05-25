@@ -15,7 +15,9 @@ COPY ["src/Articles.Core/Articles.Core.csproj", "src/Articles.Core/"]
 COPY ["src/Articles.Core.Tests/Articles.Core.Tests.csproj", "src/Articles.Core.Tests/"]
 COPY ["src/Articles.Core.Application.Tests/Articles.Core.Application.Tests.csproj", "src/Articles.Core.Application.Tests/"]
 RUN dotnet restore "src/Articles.Core.Tests/Articles.Core.Tests.csproj"
-RUN dotnet restore "src/Articles.Core.Application.Tests/Articles.Core.Application.Tests.csproj"
+RUN dotnet build "src/Articles.Core.Tests/Articles.Core.Tests.csproj" -c Release
+RUN dotnet restore "src/Articles.Core.Application.Tests/Articles.Core.Application.Tests.csproj
+RUN dotnet build "src/Articles.Core.Application.Tests/Articles.Core.Application.Tests.csproj" -c Release
 RUN dotnet restore "src/Articles.API/Articles.API.csproj"
 WORKDIR "/src/src/Articles.Core.Tests"
 RUN dotnet test "Articles.Core.Tests.csproj"
