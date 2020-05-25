@@ -1,31 +1,31 @@
 ﻿using Articles.Core.Entities;
 using Articles.Core.Exceptions;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Xunit;
 
 namespace Articles.Core.Tests
 {
     public class ArticleTests
     {
-        [Fact]
+        [Test]
         public void TestArticle_NullReferenceException()
         {
             Assert.Throws<NullReferenceException>(() => new Article(null));
         }
-        [Fact]
+        [Test]
         public void TestArticle_Author_FirstName()
         {
             Assert.Throws<CoreValidationException>(() => new Article(new Author() { FirstName = "", LastName = "lastname" }));
         }
-        [Fact]
+        [Test]
         public void TestArticle_Author_LastName()
         {
             Assert.Throws<CoreValidationException>(() => new Article(new Author() { FirstName = "Firstame", LastName = "" }));
         }
 
-        [Fact]
+        [Test]
         public void TestArticle_SetArticleAuthor_FirstName()
         {
             var article = new Article(new Author()
@@ -47,7 +47,7 @@ namespace Articles.Core.Tests
                 LastName = "LastName"
             }));
         }
-        [Fact]
+        [Test]
         public void TestArticle_SetArticleAuthor_LastName()
         {
             var article = new Article(new Author()
