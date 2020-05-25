@@ -7,6 +7,7 @@ using System.Text;
 
 namespace Articles.Core.Tests
 {
+    [TestFixture]
     public class ArticleTests
     {
         [Test]
