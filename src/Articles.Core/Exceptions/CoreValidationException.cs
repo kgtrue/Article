@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Articles.Core.Exceptions
 {
-    public class ValidationException : Exception
+    public class CoreValidationException : Exception
     {
-        public ValidationException(string msg) : base(msg)
+        public CoreValidationException(string msg) : base(msg)
         {
 
         }

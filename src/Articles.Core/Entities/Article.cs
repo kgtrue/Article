@@ -13,8 +13,8 @@ namespace Articles.Core.Entities
         public Article(Author author)
         {
             _ = author ?? throw new NullReferenceException("Author cannot be null");
-            _ = author.FirstName ?? throw new ValidationException("Author firstname is not valid name");
-            _ = author.LastName ?? throw new ValidationException("Author lastname is not valid name");
+            if (string.IsNullOrEmpty(author.FirstName)) throw new CoreValidationException("Author firstname is not valid name");
+            if (string.IsNullOrEmpty(author.LastName)) throw new CoreValidationException("Author lastname is not valid name");
             Author = author;
         }
         public string Heading { get; set; }
@@ -23,13 +23,13 @@ namespace Articles.Core.Entities
         public Author Author { get; private set; }
         public void SetArticleAuthor(Author author)
         {
-            if (string.IsNullOrEmpty( author.FirstName))
+            if (string.IsNullOrEmpty(author.FirstName))
             {
-                throw new ValidationException($"Entity \"{nameof(Author)}\" ({Author.Id}) firstname is not valid name ({this.Id}).");
+                throw new CoreValidationException($"Entity \"{nameof(Author)}\" ({Author.Id}) firstname is not valid name ({this.Id}).");
             }
             if (string.IsNullOrEmpty(author.LastName))
             {
-                throw new ValidationException($"Entity \"{nameof(Author)}\" ({Author.Id}) lastname is not valid name ({this.Id}).");
+                throw new CoreValidationException($"Entity \"{nameof(Author)}\" ({Author.Id}) lastname is not valid name ({this.Id}).");
             }
             Author = author;
         }
