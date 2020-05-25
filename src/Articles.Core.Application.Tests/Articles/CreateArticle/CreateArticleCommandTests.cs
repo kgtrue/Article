@@ -6,19 +6,20 @@ using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
 using FluentValidation;
 using MediatR;
 using Moq;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Xunit;
 
 namespace Articles.Core.Application.Tests.Articles.CreateArticle
 {
+    [TestFixture]
     public class CreateArticleCommandTests
     {
-        [Fact]
-        public async void TestCreateArticleCommand()
+        [Test]
+        public  void TestCreateArticleCommand()
         {
             var authorId = Guid.NewGuid();
             var articleId = Guid.NewGuid();
@@ -38,11 +39,11 @@ namespace Articles.Core.Application.Tests.Articles.CreateArticle
             authorRepo.Setup(x => x.GetById(It.IsAny<Guid>(), It.IsAny<CancellationToken>())).Returns(Task.FromResult(author));
 
             var createCommand = new CreateArticleCommand() { AuthorId = authorId, Heading = heading, Text = text, Year = year };
-            var handler = new CreateArticleCommand.Handler(articleRepo.Object, authorRepo.Object, mediator.Object);
-            var result = await handler.Handle(createCommand, new CancellationToken());
+            var handler = new CreateArticleCommand.Handler(articleRepo.Object, authorRepo.Object, mediator.Object);          
+            Assert.DoesNotThrowAsync(() => handler.Handle(createCommand, new CancellationToken()));
         }
-        [Fact]
-        public async void TestCreateArticleCommand_AuthorNotFound()
+        [Test]
+        public void TestCreateArticleCommand_AuthorNotFound()
         {
             var authorId = Guid.NewGuid();
             var articleId = Guid.NewGuid();
@@ -61,7 +62,7 @@ namespace Articles.Core.Application.Tests.Articles.CreateArticle
 
             var createCommand = new CreateArticleCommand() { AuthorId = authorId, Heading = heading, Text = text, Year = year };
             var handler = new CreateArticleCommand.Handler(articleRepo.Object, authorRepo.Object, mediator.Object);
-            await Assert.ThrowsAsync<NotFoundException>(() => handler.Handle(createCommand, new CancellationToken()));
+            Assert.ThrowsAsync<NotFoundException>(() => handler.Handle(createCommand, new CancellationToken()));
         }
     }
 }

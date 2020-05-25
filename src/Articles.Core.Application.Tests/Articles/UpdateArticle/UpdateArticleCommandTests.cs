@@ -4,19 +4,20 @@ using Articles.Core.Application.Common.Interfaces.Contracts;
 using Articles.Core.Entities;
 using MediatR;
 using Moq;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Xunit;
 
 namespace Articles.Core.Application.Tests.Articles.UpdateArticle
 {
+    [TestFixture]
     public class UpdateArticleCommandTests
     {
-        [Fact]
-        public async void TestUpdateArticleCommand_ArticleNotFound()
+        [Test]
+        public void TestUpdateArticleCommand_ArticleNotFound()
         {
             var mediator = new Mock<IMediator>();
 
@@ -29,10 +30,10 @@ namespace Articles.Core.Application.Tests.Articles.UpdateArticle
 
             var updateCommand = new UpdateArticleCommand() { Id = Guid.NewGuid(), AuthorId = author.Id, Heading = "heading", Text = "Text", Year = 2020 };
             var handler = new UpdateArticleCommand.Handler(articleRepo.Object, authorRepo.Object, mediator.Object);
-            await Assert.ThrowsAsync<NotFoundException>(() => handler.Handle(updateCommand, new CancellationToken()));
+            Assert.ThrowsAsync<NotFoundException>(() => handler.Handle(updateCommand, new CancellationToken()));
         }
-        [Fact]
-        public async void TestUpdateArticleCommand_AuthorNotFound()
+        [Test]
+        public void TestUpdateArticleCommand_AuthorNotFound()
         {
             var mediator = new Mock<IMediator>();
 
@@ -55,9 +56,7 @@ namespace Articles.Core.Application.Tests.Articles.UpdateArticle
 
             var updateCommand = new UpdateArticleCommand() { Id = Guid.NewGuid(), AuthorId = Guid.NewGuid(), Heading = "heading", Text = "Text", Year = 2020 };
             var handler = new UpdateArticleCommand.Handler(articleRepo.Object, authorRepo.Object, mediator.Object);
-            await Assert.ThrowsAsync<NotFoundException>(() => handler.Handle(updateCommand, new CancellationToken()));
+            Assert.ThrowsAsync<NotFoundException>(() => handler.Handle(updateCommand, new CancellationToken()));
         }
-
-
     }
 }
