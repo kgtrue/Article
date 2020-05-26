@@ -1,8 +1,11 @@
 # Article
 
-Build local docker image
-To localy navigate to article root folder and execute this command:
+Build local docker image.
 
+To build a a docker image locally.
+1. Clone the repository.
+2. open terminal and navigate to article repository root folder(There should be a file named "Dockerfile" in the folder)
+Execute this command in in the terminal.
 "docker build ."
 
 Docker repo url
