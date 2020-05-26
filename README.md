@@ -3,7 +3,7 @@
 Build local docker image
 To localy navigate to article root folder and execute this command:
 
-docker build .
+"docker build ."
 
 Docker repo url
 https://hub.docker.com/repository/docker/kgtrue/article
