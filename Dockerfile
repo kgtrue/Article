@@ -20,14 +20,19 @@ RUN dotnet restore "src/Articles.Core.Application.Tests/Articles.Core.Applicatio
 RUN dotnet restore "src/Articles.API/Articles.API.csproj"
 COPY . .
 WORKDIR /src
+WORKDIR "/src/src/Articles.Core.Tests"
 RUN dotnet build "Articles.Core.Tests.csproj" -c Release -o /app/build
 RUN dotnet test "Articles.Core.Tests.csproj" --logger "trx;LogFileName=articles-core-tests.trx"
+
+WORKDIR /src
 WORKDIR "/src/src/Articles.Core.Application.Tests"
 RUN dotnet build "Articles.Core.Application.Tests.csproj" -c Release -o /app/build
 RUN dotnet test "Articles.Core.Application.Tests.csproj" --logger "trx;LogFileName=articles-core-application-tests.trx"
+
+WORKDIR /src
 WORKDIR "/src/src/Articles.API"
 RUN dotnet build "Articles.API.csproj" -c Release -o /app/build
-WORKDIR "/src/src/Articles.Core.Tests"
+
 
 FROM build AS publish
 RUN dotnet publish "Articles.API.csproj" -c Release -o /app/publish
