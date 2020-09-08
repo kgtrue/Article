@@ -1,0 +1,19 @@
+version: '3.4'
+
+services:
+  db.api:
+    image: $mcr.microsoft.com/mssql/server:latest
+    ports:
+      - "1455:1433"
+    env_file:
+      - ././sec/ArticleSecs/local/db.local.server.env
+      - ././sec/ArticleSecs/local/db.local.sec.env
+
+
+  articles.api:
+    image: ${DOCKER_REGISTRY-}articlesapi
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+
